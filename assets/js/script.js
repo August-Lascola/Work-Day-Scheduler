@@ -21,15 +21,13 @@ for(let i = 4; i < hourArray.length; i++) {
     // console.log(afternoonTime)
 }
 
-
-
 // Load Grid Elements using bootstrap
 const loadGridElements = function() {
     for (let i =0; i < timeArray.length; i++) {
         // Add classes for styling to HTML elements
         const rowEl = $("<div>").addClass("row");
         const hourEl = $("<time>").addClass("hour col-1");
-        const pEl = $("<p>").addClass("col-10 present time-block");
+        const pEl = $("<p>").addClass("col-10 time-block");
         const buttonEl = $("<button>").addClass("col-1 saveBtn fa fa-save");
 
         // Change Text Value Based on Time
@@ -43,19 +41,40 @@ const loadGridElements = function() {
         // Appends Elements
         rowEl.append(hourEl, pEl, buttonEl);
         $(".container").append(rowEl);
-
-        console.log(hourEl);
     }
 }
 loadGridElements();
 
 
+
 // Change color based off of time
-    // Show day at top
-// Area for text input
+const checkTime = function() {
+    let currentHour = moment().format("H");
+    let workHour = 0
+// Compare color to hour, and add styling class accordingly
+     // Change from military time
+    if (currentHour > 12) {
+         workHour = currentHour - 12;
+    } else {
+        workHour = currentHour
+    }
+    for (let i = 0; i < timeArray.length; i++) {
+        const updateRow = $("<div>").addClass("row");
+        const updateP = $("<p>").addClass("present");
+        if (workHour > timeArray[i]) {
+            console.log('greater', workHour)
+        } else if (workHour < timeArray[i]) {
+            console.log('lesser', workHour)
+        } else {
+            console.log('same', workHour)
+        }
+        // if (currentHour > timeArray[i]) {
+        //     updateRow.append(updateP);
+        //     $(".container").append(updateRow);
+            // Append goes here
+        }
+    }
+   
 
-// Save Text to localstorage
 
-
-
-// Use moment js, well learn but use it to change color based off of hour
+checkTime();
