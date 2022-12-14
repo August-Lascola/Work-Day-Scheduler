@@ -65,6 +65,7 @@ var checkTime = function() {
             }
         }
         // Using moment, store current hour in a variable
+        // If the time is not during the work day, add * the desirable # of hours after (moment().format("H") * ) 
         let currentHour = parseInt(moment().format("H"));
         // Update styling based on relation between current hour and timeblock
         if (hourList[0] < currentHour) {
