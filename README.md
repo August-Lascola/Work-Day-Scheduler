@@ -1,5 +1,5 @@
 # Work-Day-Scheduler
-![Alt text](assets\img\WorkdaySS.png "Screenshot of Deployed Application")
+![Alt text](./assets\img\WorkdaySS.png "Screenshot of Deployed Application")
 ## CONTENTS OF THIS FILE
 -------------
 Introduction
