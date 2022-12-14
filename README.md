@@ -1,5 +1,5 @@
 # Work-Day-Scheduler
-![Alt text](assets\img\WorkdaySS.png)
+![Alt text](assets/img/WorkdaySS.png)
 ## CONTENTS OF THIS FILE
 -------------
 Introduction
