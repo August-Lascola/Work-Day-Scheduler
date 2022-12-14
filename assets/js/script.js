@@ -1,9 +1,15 @@
 
-// Create An Array With Numbers from 9-12, 1-5
-// Note for grader: this was just a fun challenge for myself I know I could have just typed out the array elements
+// Show Day Info at Top of Scheduler
+const dayInfo = function () {
+    const todayInfo = moment().format("dddd, MMMM, Do");
+    $("#currentDay").text(todayInfo);
+    
+}
 
+dayInfo();
 // Global Variables
 // Fun way to get an array from 1-20 I found on stackoverflow
+
 
 const hourArray =  Array(9).join().split(',').map(function(a){return this.i++},{i:1});
 
@@ -45,36 +51,50 @@ const loadGridElements = function() {
 }
 loadGridElements();
 
-
-
 // Change color based off of time
-const checkTime = function() {
-    let currentHour = moment().format("H");
-    let workHour = 0
-// Compare color to hour, and add styling class accordingly
-     // Change from military time
-    if (currentHour > 12) {
-         workHour = currentHour - 12;
-    } else {
-        workHour = currentHour
-    }
-    for (let i = 0; i < timeArray.length; i++) {
-        const updateRow = $("<div>").addClass("row");
-        const updateP = $("<p>").addClass("present");
-        if (workHour > timeArray[i]) {
-            console.log('greater', workHour)
-        } else if (workHour < timeArray[i]) {
-            console.log('lesser', workHour)
-        } else {
-            console.log('same', workHour)
+var checkTime = function() {
+    // for each row
+    $(".row").each(function(index, checkTimeEl){
+        // Retrieve each hour from row, change based off of AM/PM; 
+        // Note: tried to use a for loop using timeArray but couldn't get it to work
+        let hourList = $(checkTimeEl).find("time").text().trim().split(" ");
+        hourList[0] = parseInt(hourList[0]);
+        if (hourList[1] === "PM") {
+            if(hourList[0] != 12) {
+                hourList[0] += 12;
+            }
         }
-        // if (currentHour > timeArray[i]) {
-        //     updateRow.append(updateP);
-        //     $(".container").append(updateRow);
-            // Append goes here
+        // Using moment, store current hour in a variable
+        let currentHour = parseInt(moment().format("H"));
+        // Update styling based on relation between current hour and timeblock
+        if (hourList[0] < currentHour) {
+            $(checkTimeEl).find("p").addClass("past");
+        } else if (hourList[0] === currentHour) {
+            $(checkTimeEl).find("p").addClass("present");
+        } else if (hourList[0] > currentHour) {
+            $(checkTimeEl).find("p").addClass("future");
         }
-    }
-   
-
+    });
+}
 
 checkTime();
+
+// Create textarea, 
+$('.container').on('click', 'p', function() {
+    // Create Text Area on click
+    $(this).append(`<textarea class= 
+    "form-control-sm col-10" id="user-text">`);
+    $(this).append('</textarea>')
+    
+});
+
+
+
+// Run checkTime function every 10 minutes
+setInterval(checkTime, (10 * 60) * 1000)
+
+// To Do:
+// Capture Text Input, store in local storage after clicking save button
+// pull from local storage on page reload
+
+
